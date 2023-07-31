@@ -1,0 +1,149 @@
+Mods: {
+	TigerDuplicator: {
+		NPCs: {
+			Duplicator: {
+				DisplayName: 复制者
+
+				NameList: {
+					0: Bob
+					1: Pop
+					2: Dod
+					3: Qoq
+				}
+
+				ShopButtonName: 复制
+
+				Dialog: {
+					Default0: ...
+					Default1: ......？
+				}
+
+				TownNPCMood: {
+					Content: 我觉得很满足。
+					NoHome: 我想要个家。
+					FarFromHome: 我离家很远了。
+					LoveSpace: 我喜欢有这么多空间。
+					DislikeCrowded: 我不喜欢拥挤。
+					HateCrowded: 我厌恶拥挤的环境。
+					LikeBiome: 我喜欢{BiomeName}。
+					LoveBiome: 我爱{BiomeName}。
+					DislikeBiome: 我不喜欢{BiomeName}。
+					HateBiome: 我讨厌{BiomeName}。
+					LikeNPC: 我喜欢{NPCName}。
+					LikeNPC_Princess: 我喜欢{NPCName}。
+					Princess_LovesNPC: 我喜欢{NPCName}。
+					LoveNPC: 我爱{NPCName}。
+					DislikeNPC: 我不喜欢{NPCName}。
+					HateNPC: 我讨厌{NPCName}。
+				}
+			}
+		}
+
+		Configs: {
+			TigerDuplicatorConfig: {
+				DisplayName: Tiger的复制者模组配置
+
+				Headers: {
+					CostSettings: 花费设置
+					Presets: 预设
+					ExtraSettings: 额外设置
+				}
+
+				Cheat: {
+					Label: 作弊模式
+					Tooltip: 想要什么直接拿!
+				}
+
+				Easy: {
+					Label: 简单模式
+					Tooltip: 拐杖模式
+				}
+
+				Normal: {
+					Label: 普通模式
+					Tooltip: 同时也是默认的模式
+				}
+
+				Hard: {
+					Label: 困难模式
+					Tooltip: 你很难再复制一个东西
+				}
+
+				MoneyCostMultiple: {
+					Label: 花费倍率
+					Tooltip:
+						'''
+						0.1即等同于卖出的价格
+						默认0.8
+						'''
+				}
+
+				ExtraMoneyCostMultiple: {
+					Label: 额外花费倍率
+					Tooltip:
+						'''
+						价格会额外乘上此值
+						默认为5
+						'''
+				}
+
+				MoneyCostAtLeast: {
+					Label: 最少花费
+					Tooltip:
+						'''
+						最少需多少铜币以复制单个物品
+						不受以上两项影响
+						默认200(两枚银币)
+						'''
+				}
+
+				DefenderMedalValue: {
+					Label: 护卫奖章的基础价值
+					Tooltip:
+						'''
+						一个护卫奖章的基础价值是多少铜币
+						不受心情影响的卖价应为此值乘花费倍率乘10乘额外花费倍率
+						默认10000(一枚金币)
+						'''
+				}
+
+				CanDuplicateCoin: {
+					Label: 是否可复制钱币
+					Tooltip:
+						'''
+						不推荐开启
+						一般情况下钱会越复制越少
+						而且点错了的情况下还不能把钱按原价卖回去
+						默认false
+						'''
+				}
+
+				CanDuplicateBag: {
+					Label: 是否可复制宝藏袋
+					Tooltip:
+						'''
+						严重影响平衡!
+						除非你想无消耗复制物品否则都不推荐开启(宝藏袋一般是没有价格的)
+						同时影响任何可以右键点击的物品(礼物, 草药袋等)(包括mod物品)
+						默认false
+						'''
+				}
+
+				CanDuplicateUnloadedItem: {
+					Label: 是否可复制卸载物品
+					Tooltip:
+						'''
+						不推荐开启
+						复制出来的物品似乎并不能起什么作用
+						默认false
+						'''
+				}
+
+				DuplicateBlacklist: {
+					Label: 复制黑名单
+					Tooltip: 黑名单中的物品不会被复制
+				}
+			}
+		}
+	}
+}

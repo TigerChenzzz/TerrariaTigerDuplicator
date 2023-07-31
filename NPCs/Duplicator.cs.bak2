@@ -1,0 +1,194 @@
+﻿using System.Linq;
+using System.Collections.Generic;
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
+using Terraria.Utilities;
+using Terraria.Localization;
+using Terraria.GameContent.Personalities;
+using Terraria.ModLoader.Config;
+using Terraria.ModLoader.Default;
+
+namespace TigerDuplicator.NPCs
+{
+	[AutoloadHead]
+	public class Duplicator : ModNPC {
+        const string _path = "Mods.TigerDuplicator.NPC.Duplicator";
+        public static bool baseShop = false;
+		public static bool plantShop = false;
+        public static bool checkSpawn = false;
+		public override string Texture
+		{
+			get
+			{
+				return "TigerDuplicator/NPCs/Duplicator";
+			}
+		}
+		
+		public override void SetStaticDefaults()
+		{
+            DisplayName.SetDefault(Language.GetTextValue($"{_path}.Name"));
+            Main.npcFrameCount[Type] = 23;   
+			NPCID.Sets.AttackFrameCount[Type] = 2;
+			NPCID.Sets.DangerDetectRange[Type] = 500;
+			NPCID.Sets.AttackType[Type] = 0;
+			NPCID.Sets.AttackTime[Type] = 22;
+			NPCID.Sets.AttackAverageChance[Type] = 10;
+			NPCID.Sets.HatOffsetY[Type] = -4;
+
+            NPC.Happiness.SetBiomeAffection<ForestBiome>(AffectionLevel.Love)
+                .SetNPCAffection(NPCID.Guide, AffectionLevel.Love)
+                .SetNPCAffection(NPCID.Dryad, AffectionLevel.Like);
+        }
+		
+		public override void SetDefaults()
+		{
+			NPC.townNPC = true;
+            NPC.friendly = true;
+            NPC.width = 18;
+            NPC.height = 40;
+            NPC.aiStyle = 7;
+            NPC.damage = 10;
+            NPC.defense = 100;
+            NPC.lifeMax = 250;
+			NPC.HitSound = SoundID.NPCHit1;
+			NPC.DeathSound = SoundID.NPCDeath1;
+            NPC.knockBackResist = 0.5f;
+            AnimationType = NPCID.Clothier;
+		}
+		
+        public override bool CanTownNPCSpawn(int numTownNPCs, int money)
+		{
+            if(checkSpawn) {
+                return true;
+            }
+            for (int k = 0; k <= 255; ++k) {
+                Player player = Main.player[k];
+                if(!player.active) {
+                    continue;
+                }
+                if(player.CanAfford(10000)) {
+                    checkSpawn = true;
+                    return true;
+                }
+            }
+            return false;
+		}
+ 
+        public override List<string> SetNPCNameList()
+        {
+            return new List<string>() {
+                Language.GetTextValue($"{_path}.Name1"),
+                Language.GetTextValue($"{_path}.Name2")
+            };
+        }
+ 
+		public override void TownNPCAttackStrength(ref int damage, ref float knockback)
+		{
+			if (!Main.hardMode)
+			{
+			damage = 20;
+			}
+			if (!NPC.downedMoonlord && Main.hardMode)
+			{
+			damage = 50;
+			}
+			if (NPC.downedMoonlord)
+			{
+			damage = 100;
+			}
+			knockback = 8f;
+		}
+
+		public override void TownNPCAttackCooldown(ref int cooldown, ref int randExtraCooldown)
+		{
+			cooldown = 120;
+			randExtraCooldown = 30;
+		}
+
+		public override void TownNPCAttackProj(ref int projType, ref int attackDelay)
+		{
+			projType = ProjectileID.TopazBolt;
+			attackDelay = 20;
+		}
+
+		public override void TownNPCAttackProjSpeed(ref float multiplier, ref float gravityCorrection, ref float randomOffset)
+		{
+			multiplier = 15f;
+            gravityCorrection = 0f;
+			randomOffset = 2f;
+		}
+ 
+        public override string GetChat()
+        {                                           //npc chat
+         string DuplicatorChat1 = Language.GetTextValue($"{_path}.Dialog.Default1");
+		 string DuplicatorChat2 = Language.GetTextValue($"{_path}.Dialog.Default2");
+            switch (Main.rand.Next(2))
+            {
+                case 0:                                     
+				return DuplicatorChat1;
+                default:
+				return DuplicatorChat2;
+            }
+        }
+ 
+        public override void SetChatButtons(ref string button, ref string button2)
+        {
+			button = Language.GetTextValue($"{_path}.Shop");
+            //button = Language.GetTextValue("LegacyInterface.28");
+        }
+ 
+        public override void OnChatButtonClicked(bool firstButton, ref bool shop)
+		{
+		    shop = true;
+		}
+ 
+        public override void ModifyActiveShop(Chest shop, ref int nextSlot) {
+            Player player = Main.player[Main.myPlayer];
+            for(int i = 0; i < player.inventory.Length; ++i) {
+                Item item = player.inventory[i];
+                #region 查重
+                bool con = false;
+                for(int j = 0; j < i; ++j) {
+                    if(item.type == player.inventory[j].type) {
+                        con = true;
+                    }
+                }
+                if (con) {
+                    continue;
+                }
+                #endregion
+                if (item != null && item.type > ItemID.None) {
+                    ItemDefinition itemd = new(item.type);
+                    if(TigerDuplicator.config.DuplicateBlacklist.Contains(itemd)) {
+                        continue;
+                    }
+                    if(!TigerDuplicator.config.CanDuplicateUnloadedItem && item.type == ItemType<UnloadedItem>()) {
+                        continue;
+                    }
+                    if(!TigerDuplicator.config.CanDuplicateBag && TigerDuplicator.RightClickable(item)) {
+						continue;
+					}
+                    if(!TigerDuplicator.config.CanDuplicateCoin && item.IsACoin) {
+                        continue;
+                    }
+                    switch (item.type) {
+                        case ItemID.DefenderMedal://护卫奖章
+                            shop.item[nextSlot].SetDefaults(item.type);
+                            shop.item[nextSlot].shopCustomPrice = (int)(TigerDuplicator.config.DefenderMedalValue * TigerDuplicator.config.MoneyCostMultiple * TigerDuplicator.config.ExtraMoneyCostMultiple * 10);
+                            break;
+                        default:
+                            shop.item[nextSlot].SetDefaults(item.type);
+                            shop.item[nextSlot].shopCustomPrice = (int)(item.value * TigerDuplicator.config.MoneyCostMultiple * TigerDuplicator.config.ExtraMoneyCostMultiple * 2);
+                            break;
+                    }
+                    if(shop.item[nextSlot].shopCustomPrice < TigerDuplicator.config.MoneyCostAtLeast) {
+                        shop.item[nextSlot].shopCustomPrice = TigerDuplicator.config.MoneyCostAtLeast;
+                    }
+                    nextSlot += 1;
+                }
+            }
+		}
+	}
+}

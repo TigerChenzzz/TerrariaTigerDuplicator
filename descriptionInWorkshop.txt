@@ -1,0 +1,3 @@
+Tiger's Duplicator is a mod which adds a NPC called Duplicator to copy almost anything in your inventory using money.
+The Duplicator would come when you have at least a gold coin.
+How many you cost and what you can duplicate can be configured.

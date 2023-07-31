@@ -1,0 +1,55 @@
+v0.1
+-clone things on workbenches!
+-a powerful sword named First that can't be got properly
+
+v0.1.1
+-clone environment changed to different kinds of coin tiles
+
+v0.1.2
+-cloning now needs money of the buy price
+
+v0.1.3
+-config for money cost multiple, default 0.2 for 2 times of the sell-to-NPC price
+
+v0.1.4
+-the sword changed to Zenith in Terraria v1.4
+
+v0.1.4.1
+-config default modified to 0.8 for balancing
+-modified the mod name and author name
+-remove the useless and temporarily useless things
+-add log to mod source?
+
+v0.1.4.2
+-the sword changed back to First and add in its Chinese translation, Zenith moved to TigerCarrier mod
+-First still cannot be got properly
+
+v0.1.5
+-The clone function moved to a NPC called Duplicator, he'll come when you have at least a gold
+-the source is open now
+-defender medal now need money to clone
+-set a extra money cost multiple and a money cost at least in config
+
+v0.1.6
+-port to Terraria 1.4
+-disable the duplication of coins
+-published to Steam workshop
+
+v0.1.6.1
+-balance: default configuration changed (still not balanced at all)
+-add different mode as presets in configuration, old default values in easy mode
+
+v0.1.6.2
+-disable the duplication of loot bags (actually anything that can right click)
+-add configuration to defender medal's value and whether coins and bags can be duplicated
+-add cheat mode where you can duplicate use no money
+-bug fixed: the Duplicator may not spawn properly
+
+v0.1.6.3
+-add a duplicate blacklist
+-the default blacklist has three kinds of liquid bucket
+-disable the duplication of unloaded item (you can still enable it with configuation)
+-add Chinese log to source
+
+v0.1.6.4
+-bug fixed: The Duplicator can spawn properly now

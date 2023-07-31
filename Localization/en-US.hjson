@@ -1,0 +1,150 @@
+Mods: {
+	TigerDuplicator: {
+		NPCs: {
+			Duplicator: {
+				DisplayName: Duplicator
+
+				NameList: {
+					0: Bob
+					1: Pop
+					2: Dod
+					3: Qoq
+				}
+
+				ShopButtonName: Duplicate
+
+				Dialog: {
+					Default0: ...
+					Default1: ......?
+				}
+
+				TownNPCMood: {
+					Content: I feel content.
+					NoHome: I want a home!
+					FarFromHome: I am far from my home.
+					LoveSpace: I love how there is so much space.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					Princess_LovesNPC: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+				}
+			}
+		}
+
+		Configs: {
+			TigerDuplicatorConfig: {
+				DisplayName: Tiger's Duplicator Mod Config
+
+				Headers: {
+					CostSettings: Cost Settings
+					Presets: Presets
+					ExtraSettings: Extra Settings
+				}
+
+				Cheat: {
+					Label: Cheat Mode
+					Tooltip: take whatever you want!
+				}
+
+				Easy: {
+					Label: Simple Mode
+					Tooltip: helpping mode
+				}
+
+				Normal: {
+					Label: Normal Mode
+					Tooltip: also the default mode
+				}
+
+				Hard: {
+					Label: Hard Mode
+					Tooltip: you can hardly duplicate an item
+				}
+
+				MoneyCostMultiple: {
+					Label: Money Cost Multiple
+					Tooltip:
+						'''
+						0.1 for sell-to-NPC value
+						0.8 by default
+						'''
+				}
+
+				ExtraMoneyCostMultiple: {
+					Label: Extra Money Cost Multiple
+					Tooltip:
+						'''
+						the price would be extra multiplied by this
+						5 by default
+						'''
+				}
+
+				MoneyCostAtLeast: {
+					Label: Money Cost At Least
+					Tooltip:
+						'''
+						the least copper cost by clone a single item
+						not affected by the two above
+						200 (2 silver) by default
+						'''
+				}
+
+				DefenderMedalValue: {
+					Label: Defender Medal's Base Value
+					Tooltip:
+						'''
+						How many copper is a defender medal
+						sell price that don't be influenced by mood should be
+						this value multipled by Money Cost Multiple multipled by 10 multipled by Extra Money Cost Multiple
+						10000 (a gold) by default
+						'''
+				}
+
+				CanDuplicateCoin: {
+					Label: Can Duplicate Coin
+					Tooltip:
+						'''
+						not recommended
+						usually the money would get less when duplicating
+						and you can't put it back when you make the mistake
+						false by default
+						'''
+				}
+
+				CanDuplicateBag: {
+					Label: Can Duplicate Bag
+					Tooltip:
+						'''
+						great influence on balance!
+						not recommended unless you want duplicate without money (bags are usually valueless)
+						infuence anything that can right click(e.g. present, herb bag)(include mod item)
+						false by default
+						'''
+				}
+
+				CanDuplicateUnloadedItem: {
+					Label: Can Duplicate Unloaded Item
+					Tooltip:
+						'''
+						not recommended
+						the duplicated one would not work properly
+						false by default
+						'''
+				}
+
+				DuplicateBlacklist: {
+					Label: Duplicate Blacklist
+					Tooltip: Items in the blacklist would not be duplicated
+				}
+			}
+		}
+	}
+}

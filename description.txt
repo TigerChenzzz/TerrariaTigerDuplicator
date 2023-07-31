@@ -1,0 +1,2 @@
+Tiger's Duplicator is a mod which adds a NPC called Duplicator to duplicate anything in your inventory use money.
+此模组增加了一个复制者NPC, 它会出售任何你的背包中有的物品。
