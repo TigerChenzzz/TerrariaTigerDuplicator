@@ -1,3 +1,8 @@
+v0.2.0.1
+-items in shop would not be favorited
+-Census spawn condition query supported
+-the spawn condition would be exactly the same as the Merchant (50 silvers)
+
 v0.2
 -port to 1.4.4
 -change some text

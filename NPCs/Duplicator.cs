@@ -14,7 +14,6 @@ namespace TigerDuplicator.NPCs;
 [AutoloadHead]
 public class Duplicator : ModNPC {
     private static TigerDuplicatorConfig Config => TigerDuplicator.config;
-    private static bool checkSpawn = false;
 
     public override void SetStaticDefaults() {
         // DisplayName.SetDefault(Language.GetTextValue($"{_path}.Name"));
@@ -48,9 +47,6 @@ public class Duplicator : ModNPC {
 
     public override bool CanTownNPCSpawn(int numTownNPCs)/* tModPorter Suggestion: Copy the implementation of NPC.SpawnAllowed_Merchant in vanilla if you to count money, and be sure to set a flag when unlocked, so you don't count every tick. */
     {
-        if(checkSpawn) {
-            return true;
-        }
         //for(int k = 0; k <= 255; ++k) {
         //    Player player = Main.player[k];
         //    if(!player.active) {
@@ -61,11 +57,7 @@ public class Duplicator : ModNPC {
         //        return true;
         //    }
         //}
-        if(NPC.SpawnAllowed_Merchant()) {
-            checkSpawn = true;
-            return true;
-        }
-        return false;
+        return NPC.SpawnAllowed_Merchant();
     }
 
     public override List<string> SetNPCNameList() {
@@ -169,6 +161,7 @@ public class Duplicator : ModNPC {
                 }
                 items[nextSlot] = item.Clone();
                 items[nextSlot].stack = 1;
+                items[nextSlot].favorited = false;
                 items[nextSlot].shopCustomPrice = item.type switch {
                     ItemID.DefenderMedal => (int)(Config.DefenderMedalValue * Config.MoneyCostMultiple * Config.ExtraMoneyCostMultiple * 10),
                     _ => (int?)(int)(item.value * Config.MoneyCostMultiple * Config.ExtraMoneyCostMultiple * 2),

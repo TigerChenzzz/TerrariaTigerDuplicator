@@ -1,5 +1,5 @@
 Tiger's Duplicator
 Tiger's Duplicator is a mod which adds a NPC called Duplicator to copy almost anything in your inventory using money.
-The Duplicator's appearing condition is the same as the merchant (come when you have at least a gold coin).
+The Duplicator's appearing condition is the same as the merchant (come when you have at least 50 silver coins).
 How many you cost and what you can duplicate can be configured.
 [quote=tModLoader]Developed By Tiger[/quote]

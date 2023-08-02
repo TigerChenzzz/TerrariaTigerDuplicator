@@ -36,6 +36,8 @@ Mods: {
 					DislikeNPC: 我不喜欢{NPCName}。
 					HateNPC: 我讨厌{NPCName}。
 				}
+
+				Census.SpawnCondition: 与商人一致
 			}
 		}
 

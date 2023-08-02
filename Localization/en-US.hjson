@@ -36,6 +36,8 @@ Mods: {
 					DislikeNPC: I dislike {NPCName}.
 					HateNPC: I hate {NPCName}.
 				}
+
+				Census.SpawnCondition: Same as the Merchant
 			}
 		}
 
