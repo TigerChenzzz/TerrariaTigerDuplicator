@@ -135,41 +135,71 @@ public class Duplicator : ModNPC {
             }
             Item item = player.inventory[i];
             #region 查重
+            if(Config.RepeatDuplicate) {
+                goto AfterRepeatCheck;
+            }
             bool con = false;
             for(int j = 0; j < i; ++j) {
                 if(item.type == player.inventory[j].type) {
                     con = true;
+                    break;
                 }
             }
             if(con) {
                 continue;
             }
+        AfterRepeatCheck:
             #endregion
             if(item != null && item.type > ItemID.None) {
                 ItemDefinition itemd = new(item.type);
+                if(Config.DuplicateWhitelist.Contains(itemd)) {
+                    goto AfterConditionCheck;
+                }
                 if(Config.DuplicateBlacklist.Contains(itemd)) {
                     continue;
                 }
                 if(!Config.CanDuplicateUnloadedItem && item.type == ItemType<UnloadedItem>()) {
                     continue;
                 }
-                if(!Config.CanDuplicateBag && TigerDuplicator.RightClickable(item)) {
+                if(!Config.CanDuplicateBag && IsBag(item)) {
+                    continue;
+                }
+                if(!Config.CanDuplicateRightClickable && (!IsBag(item) && RightClickable(item))) {
                     continue;
                 }
                 if(!Config.CanDuplicateCoin && item.IsACoin) {
                     continue;
                 }
+            AfterConditionCheck:
                 items[nextSlot] = item.Clone();
                 items[nextSlot].stack = 1;
                 items[nextSlot].favorited = false;
-                items[nextSlot].shopCustomPrice = item.type switch {
-                    ItemID.DefenderMedal => (int)(Config.DefenderMedalValue * Config.MoneyCostMultiple * Config.ExtraMoneyCostMultiple * 10),
-                    _ => (int?)(int)(item.value * Config.MoneyCostMultiple * Config.ExtraMoneyCostMultiple * 2),
-                };
+                items[nextSlot].newAndShiny = false;
+                int value = Config.GetCustomValue().ContainsKey(itemd) ?
+                    Config.GetCustomValue()[itemd] : item.value;
+                items[nextSlot].shopCustomPrice = (int)(value * Config.MoneyCostMultiple * Config.ExtraMoneyCostMultiple * 2);
                 if(items[nextSlot].shopCustomPrice < Config.MoneyCostAtLeast) {
                     items[nextSlot].shopCustomPrice = Config.MoneyCostAtLeast;
                 }
             }
         }
+    }
+
+    private static bool IsBag(Item item) => ItemID.Sets.OpenableBag[item.type];
+
+    private static bool RightClickable(Item item) {
+        //if(ItemID.Sets.OpenableBag[item.type])
+        //    return true;
+        //bool oldRight = Main.mouseRight;
+        //Main.mouseRight = true;
+        //bool ret = ItemRightClickable[item.type] || ItemLoader.CanRightClick(item);
+        bool ret = ItemLoader.CanRightClick(item);
+        //Main.mouseRight = oldRight;
+        return ret;
+        var rules = Main.ItemDropsDB.GetRulesForItemID(item.type);
+        if (rules != null && rules.Count > 0) {
+            return true;
+        }
+        return false;
     }
 }

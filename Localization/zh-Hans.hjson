@@ -15,7 +15,7 @@ Mods: {
 
 				Dialog: {
 					Default0: ...
-					Default1: ......？
+					Default1: ......?
 				}
 
 				TownNPCMood: {
@@ -48,7 +48,8 @@ Mods: {
 				Headers: {
 					CostSettings: 花费设置
 					Presets: 预设
-					ExtraSettings: 额外设置
+					DuplicateListSettings: 复制名单设置
+					OtherSettings: 其他设置
 				}
 
 				Cheat: {
@@ -99,18 +100,19 @@ Mods: {
 						'''
 				}
 
-				DefenderMedalValue: {
-					Label: 护卫奖章的基础价值
+				CustomValue: {
+					Label: 自定义价格
 					Tooltip:
 						'''
-						一个护卫奖章的基础价值是多少铜币
-						不受心情影响的卖价应为此值乘花费倍率乘10乘额外花费倍率
-						默认10000(一枚金币)
+						自定义一些物品的价值是多少铜币
+						不受心情影响的卖价应为此值乘花费倍率乘2乘额外花费倍率
+						注意, 此条设置不会影响物品是否允许被复制
+						默认设置了护卫奖章的价值为50000(五枚金币)
 						'''
 				}
 
 				CanDuplicateCoin: {
-					Label: 是否可复制钱币
+					Label: 是否可复制钱币[i:73]
 					Tooltip:
 						'''
 						不推荐开启
@@ -121,12 +123,21 @@ Mods: {
 				}
 
 				CanDuplicateBag: {
-					Label: 是否可复制宝藏袋
+					Label: 是否可复制袋子[i:3093]
 					Tooltip:
 						'''
 						严重影响平衡!
 						除非你想无消耗复制物品否则都不推荐开启(宝藏袋一般是没有价格的)
-						同时影响任何可以右键点击的物品(礼物, 草药袋等)(包括mod物品)
+						包括宝藏袋与钓鱼获得的箱子
+						默认false
+						'''
+				}
+
+				CanDuplicateRightClickable: {
+					Label: 是否可复制可右键点击的物品
+					Tooltip:
+						'''
+						不包括袋子
 						默认false
 						'''
 				}
@@ -135,15 +146,60 @@ Mods: {
 					Label: 是否可复制卸载物品
 					Tooltip:
 						'''
-						不推荐开启
-						复制出来的物品似乎并不能起什么作用
+						严重影响平衡!
 						默认false
 						'''
 				}
 
 				DuplicateBlacklist: {
 					Label: 复制黑名单
-					Tooltip: 黑名单中的物品不会被复制
+					Tooltip:
+						'''
+						黑名单中的物品不会被复制
+						默认包含水桶, 岩浆桶和蜂蜜桶
+						'''
+				}
+
+				DuplicateWhitelist: {
+					Label: 复制白名单
+					Tooltip: 白名单中的物品会无视以上配置可以被复制
+				}
+
+				RepeatDuplicate: {
+					Label: 重复复制
+					Tooltip:
+						'''
+						背包中重复的物品是否分别复制
+						默认false
+						'''
+				}
+
+				SeeChangeLog: {
+					Label: 查看更新日志
+					Tooltip: 非常详细的更新日志!
+				}
+			}
+
+			SeeChangeLogClass: {
+				Tooltip: 查看更新日志的东西
+
+				ChangeLogDisplay: {
+					Label: 更新日志展示
+					Tooltip: ""
+				}
+			}
+
+			ItemValuePair: {
+				Tooltip: 自定义此物品的价值
+
+				Item: {
+					Label: 物品
+					Tooltip: ""
+				}
+
+				Value: {
+					Label: 价值
+					Tooltip: 单位铜币
 				}
 			}
 		}

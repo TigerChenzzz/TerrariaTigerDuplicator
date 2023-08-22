@@ -1,5 +1,5 @@
 displayName = Tiger's Duplicator
-author = Tiger
-version = 0.2.0.1
+author = Tigerzzz
+version = 0.2.1
 includeSource = true
 buildIgnore = *.csproj, *.sln, *.bak, obj\*, bin\*, *.suo, *.user, .git\*, .vs\*, Libraries\*

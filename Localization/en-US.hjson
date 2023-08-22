@@ -48,7 +48,8 @@ Mods: {
 				Headers: {
 					CostSettings: Cost Settings
 					Presets: Presets
-					ExtraSettings: Extra Settings
+					DuplicateListSettings: Duplicate List Settings
+					OtherSettings: Other Settings
 				}
 
 				Cheat: {
@@ -99,14 +100,15 @@ Mods: {
 						'''
 				}
 
-				DefenderMedalValue: {
-					Label: Defender Medal's Base Value
+				CustomValue: {
+					Label: Custom Value
 					Tooltip:
 						'''
-						How many copper is a defender medal
+						customize some items would value how many coppers
 						sell price that don't be influenced by mood should be
-						this value multipled by Money Cost Multiple multipled by 10 multipled by Extra Money Cost Multiple
-						10000 (a gold) by default
+						this value multipled by Money Cost Multiple multipled by 2 multipled by Extra Money Cost Multiple
+						be attention that this settings would not influence whether the item could be duplicated
+						set the Defender Medal's value to 50000 (5 gold) by default
 						'''
 				}
 
@@ -127,7 +129,16 @@ Mods: {
 						'''
 						great influence on balance!
 						not recommended unless you want duplicate without money (bags are usually valueless)
-						infuence anything that can right click(e.g. present, herb bag)(include mod item)
+						includes boss bags and fishing crates
+						false by default
+						'''
+				}
+
+				CanDuplicateRightClickable: {
+					Label: Can Duplicate The Right Clickable
+					Tooltip:
+						'''
+						bags are not included
 						false by default
 						'''
 				}
@@ -136,15 +147,64 @@ Mods: {
 					Label: Can Duplicate Unloaded Item
 					Tooltip:
 						'''
-						not recommended
-						the duplicated one would not work properly
+						great influence on balance!
 						false by default
 						'''
 				}
 
 				DuplicateBlacklist: {
 					Label: Duplicate Blacklist
-					Tooltip: Items in the blacklist would not be duplicated
+					Tooltip:
+						'''
+						items in the blacklist would not be duplicated
+						includes three kinds of liquid buckets by default
+						'''
+				}
+
+				DuplicateWhitelist: {
+					Label: Duplicate Whitelist
+					Tooltip:
+						'''
+						items in the whitelist could always be duplicated
+						ignores the settings above
+						'''
+				}
+
+				RepeatDuplicate: {
+					Label: Duplicate Repeated Item
+					Tooltip:
+						'''
+						whether items that repeat in the inventory repeat in the shop
+						false by default
+						'''
+				}
+
+				SeeChangeLog: {
+					Label: See Change Log
+					Tooltip: ""
+				}
+			}
+
+			SeeChangeLogClass: {
+				Tooltip: ""
+
+				ChangeLogDisplay: {
+					Label: Change Log Display
+					Tooltip: ""
+				}
+			}
+
+			ItemValuePair: {
+				Tooltip: customize the item's value
+
+				Item: {
+					Label: Item
+					Tooltip: ""
+				}
+
+				Value: {
+					Label: Value
+					Tooltip: how many coppers
 				}
 			}
 		}
