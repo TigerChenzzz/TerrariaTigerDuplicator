@@ -1,11 +1,16 @@
 Value:
 	'''
+	v0.2.1.1
+	-cap max price to 999[i:74]99[i:73]99[i:72]99[i:71], for that anything over
+	    can't be bought at all, configurable
+	-set money cost at most in config
+
 	v0.2.1
 	-items in shop would not be shiny to show they're "new"
 	-seperate the bags' and the rightclickable's duplication configuation
 	-add a duplicate whitelist
 	-add a repeat duplicate setting, configuate whether items that repeat
-		in the inventory repeat in the shop
+	    in the inventory repeat in the shop
 	-change log can be checked in the settings
 	-[log move from log.txt to .hjson file]
 	-[the author's name update]
@@ -15,7 +20,7 @@ Value:
 	-items in shop would not be favorited
 	-Census spawn condition query supported
 	-the spawn condition would be exactly the same as the Merchant
-		(50 silvers)
+	    (50 silvers)
 
 	v0.2
 	-port to 1.4.4
@@ -31,21 +36,21 @@ Value:
 	-add a duplicate blacklist
 	-the default blacklist has three kinds of liquid bucket
 	-disable the duplication of unloaded item (you can still enable it
-		with configuation)
+	    with configuation)
 	-[add Chinese log to source]
 
 	v0.1.6.2
 	-disable the duplication of loot bags (actually anything that can
-		right click)
+	    right click)
 	-add configuration to defender medal's value and whether coins and
-		bags can be duplicated
+	    bags can be duplicated
 	-add cheat mode where you can duplicate use no money
 	-bug fixed: the Duplicator may not spawn properly
 
 	v0.1.6.1
 	-balance: default configuration changed (still not balanced at all)
 	-add different mode as presets in configuration, old default values
-		in easy mode
+	    in easy mode
 
 	v0.1.6
 	-port to Terraria 1.4
@@ -54,14 +59,14 @@ Value:
 
 	v0.1.5
 	-The clone function moved to a NPC called Duplicator, he'll come
-		when you have at least a gold
+	    when you have at least a gold
 	-[the source is open now]
 	-defender medal now need money to clone
 	-set a extra money cost multiple and a money cost at least in config
 
 	v0.1.4.2
 	-the sword changed back to First and add in its Chinese translation,
-		Zenith moved to TigerCarrier mod
+	    Zenith moved to TigerCarrier mod
 	-First still cannot be got properly
 
 	v0.1.4.1
@@ -75,7 +80,7 @@ Value:
 
 	v0.1.3
 	-config for money cost multiple, default 0.2 for 2 times of the
-		sell-to-NPC price
+	    sell-to-NPC price
 
 	v0.1.2
 	-cloning now needs money of the buy price

@@ -95,8 +95,27 @@ Mods: {
 					Tooltip:
 						'''
 						最少需多少铜币以复制单个物品
-						不受以上两项影响
+						不受以上两项影响, 但会受 NPC 心情影响
 						默认200(两枚银币)
+						'''
+				}
+
+				MoneyCostAtMost: {
+					Label: 最多花费
+					Tooltip:
+						'''
+						最多需多少铜币以复制单个物品
+						上一项优先于此项生效
+						默认-1(无上限)
+						'''
+				}
+
+				Cap999: {
+					Label: 价格限制
+					Tooltip:
+						'''
+						限制最大价格为 999[i:74]99[i:73]99[i:72]99[i:71]
+						因为任何超过此价的东西都无法购买
 						'''
 				}
 
@@ -201,6 +220,13 @@ Mods: {
 					Label: 价值
 					Tooltip: 单位铜币
 				}
+			}
+
+			CapRange: {
+				Tooltip: ""
+				None.Label: 不作限制
+				OnlyDuplicator.Label: 只限制复制者的价格
+				AllNPC.Label: 限制所有 NPC 的价格
 			}
 		}
 	}

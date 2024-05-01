@@ -95,8 +95,30 @@ Mods: {
 					Tooltip:
 						'''
 						the least copper cost by clone a single item
-						not affected by the two above
+						not affected by the two above, but affected by the npc's mood
 						200 (2 silver) by default
+						'''
+				}
+
+				MoneyCostAtMost: {
+					Label: Money Cost At Most
+					Tooltip:
+						'''
+						the most copper cost by clone a single item
+						the previous takes precedence over this
+						-1 by default, means don't have a max value
+						'''
+				}
+
+				Cap999: {
+					Label: Cap Price
+					Tooltip:
+						'''
+						cap the price to 999[i:74]99[i:73]99[i:72]99[i:71]
+						for that anything over can't be bought at all
+						Don't Cap: don't cap any price
+						Only Duplicator: only cap the price of the Duplicator
+						All NPCs: cap the price of all npcs
 						'''
 				}
 
@@ -206,6 +228,13 @@ Mods: {
 					Label: Value
 					Tooltip: how many coppers
 				}
+			}
+
+			CapRange: {
+				Tooltip: ""
+				None.Label: Don't Cap
+				OnlyDuplicator.Label: Only Duplicator
+				AllNPC.Label: All NPCs
 			}
 		}
 	}

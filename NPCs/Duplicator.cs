@@ -71,13 +71,13 @@ public class Duplicator : ModNPC {
 
     #region 攻击相关属性设置
     public override void TownNPCAttackStrength(ref int damage, ref float knockback) {
-        if(!Main.hardMode) {
+        if (!Main.hardMode) {
             damage = 20;
         }
-        if(!NPC.downedMoonlord && Main.hardMode) {
+        if (!NPC.downedMoonlord && Main.hardMode) {
             damage = 50;
         }
-        if(NPC.downedMoonlord) {
+        if (NPC.downedMoonlord) {
             damage = 100;
         }
         knockback = 8f;
@@ -112,7 +112,7 @@ public class Duplicator : ModNPC {
     }
 
     public override void OnChatButtonClicked(bool firstButton, ref string shopName) {
-        if(firstButton) {
+        if (firstButton) {
             shopName = "Shop";
         }
     }
@@ -124,50 +124,50 @@ public class Duplicator : ModNPC {
     public override void ModifyActiveShop(string shopName, Item[] items) {
         Player player = Main.player[Main.myPlayer];
         int nextSlot = 0;
-        for(int i = 0; i < player.inventory.Length; ++i) {
+        for (int i = 0; i < player.inventory.Length; ++i) {
         CheckInventoryStart:
-            if(items.Length <= nextSlot) {
+            if (items.Length <= nextSlot) {
                 break;
             }
-            if(items[nextSlot] != null && !items[nextSlot].IsAir) {
+            if (items[nextSlot] != null && !items[nextSlot].IsAir) {
                 nextSlot += 1;
                 goto CheckInventoryStart;
             }
             Item item = player.inventory[i];
             #region 查重
-            if(Config.RepeatDuplicate) {
+            if (Config.RepeatDuplicate) {
                 goto AfterRepeatCheck;
             }
             bool con = false;
-            for(int j = 0; j < i; ++j) {
-                if(item.type == player.inventory[j].type) {
+            for (int j = 0; j < i; ++j) {
+                if (item.type == player.inventory[j].type) {
                     con = true;
                     break;
                 }
             }
-            if(con) {
+            if (con) {
                 continue;
             }
         AfterRepeatCheck:
             #endregion
-            if(item != null && item.type > ItemID.None) {
+            if (item != null && item.type > ItemID.None) {
                 ItemDefinition itemd = new(item.type);
-                if(Config.DuplicateWhitelist.Contains(itemd)) {
+                if (Config.DuplicateWhitelist.Contains(itemd)) {
                     goto AfterConditionCheck;
                 }
-                if(Config.DuplicateBlacklist.Contains(itemd)) {
+                if (Config.DuplicateBlacklist.Contains(itemd)) {
                     continue;
                 }
-                if(!Config.CanDuplicateUnloadedItem && item.type == ItemType<UnloadedItem>()) {
+                if (!Config.CanDuplicateUnloadedItem && item.type == ItemType<UnloadedItem>()) {
                     continue;
                 }
-                if(!Config.CanDuplicateBag && IsBag(item)) {
+                if (!Config.CanDuplicateBag && IsBag(item)) {
                     continue;
                 }
-                if(!Config.CanDuplicateRightClickable && (!IsBag(item) && RightClickable(item))) {
+                if (!Config.CanDuplicateRightClickable && (!IsBag(item) && RightClickable(item))) {
                     continue;
                 }
-                if(!Config.CanDuplicateCoin && item.IsACoin) {
+                if (!Config.CanDuplicateCoin && item.IsACoin) {
                     continue;
                 }
             AfterConditionCheck:
@@ -175,12 +175,19 @@ public class Duplicator : ModNPC {
                 items[nextSlot].stack = 1;
                 items[nextSlot].favorited = false;
                 items[nextSlot].newAndShiny = false;
-                int value = Config.GetCustomValue().ContainsKey(itemd) ?
+                long value = Config.GetCustomValue().ContainsKey(itemd) ?
                     Config.GetCustomValue()[itemd] : item.value;
-                items[nextSlot].shopCustomPrice = (int)(value * Config.MoneyCostMultiple * Config.ExtraMoneyCostMultiple * 2);
-                if(items[nextSlot].shopCustomPrice < Config.MoneyCostAtLeast) {
-                    items[nextSlot].shopCustomPrice = Config.MoneyCostAtLeast;
+                value = (long)(value * Config.MoneyCostMultiple * Config.ExtraMoneyCostMultiple * 2);
+                if (Config.MoneyCostAtMost >= 0 && value > Config.MoneyCostAtMost) {
+                    value = Config.MoneyCostAtMost;
                 }
+                if (value < Config.MoneyCostAtLeast) {
+                    value = Config.MoneyCostAtLeast;
+                }
+                if (value > int.MaxValue) {
+                    value = int.MaxValue;
+                }
+                items[nextSlot].shopCustomPrice = (int)value;
             }
         }
     }
@@ -201,5 +208,24 @@ public class Duplicator : ModNPC {
             return true;
         }
         return false;
+    }
+
+    public override void Load() {
+        On_Player.GetItemExpectedPrice += ItemPriceCapTo999;
+    }
+
+    private void ItemPriceCapTo999(On_Player.orig_GetItemExpectedPrice orig, Player self, Item item, out long calcForSelling, out long calcForBuying) {
+        orig(self, item, out calcForSelling, out calcForBuying);
+        // ItemID.CopperCoin = 71
+        // ItemID.SilverCoin = 72
+        // ItemID.GoldCoin = 73
+        // ItemID.PlatinumCoin = 74
+        int cap = 999_99_99_99;
+        if (Config.Cap999 == TigerDuplicatorConfig.CapRange.OnlyDuplicator && Main.LocalPlayer.TalkNPC.type == NPCType<Duplicator>() ||
+            Config.Cap999 == TigerDuplicatorConfig.CapRange.AllNPC) {
+            if (calcForBuying > cap) {
+                calcForBuying = cap;
+            }
+        }
     }
 }
