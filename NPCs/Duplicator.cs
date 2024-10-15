@@ -1,12 +1,8 @@
-﻿using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Terraria;
+using Terraria.GameContent.Personalities;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using Terraria.Utilities;
-using Terraria.Localization;
-using Terraria.GameContent.Personalities;
 using Terraria.ModLoader.Config;
 using Terraria.ModLoader.Default;
 
@@ -61,12 +57,12 @@ public class Duplicator : ModNPC {
     }
 
     public override List<string> SetNPCNameList() {
-        return new List<string>() {
+        return [
             this.GetLocalizedValue("NameList.0"),
             this.GetLocalizedValue("NameList.1"),
             this.GetLocalizedValue("NameList.2"),
             this.GetLocalizedValue("NameList.3"),
-        };
+        ];
     }
 
     #region 攻击相关属性设置
@@ -158,7 +154,7 @@ public class Duplicator : ModNPC {
                 if (Config.DuplicateBlacklist.Contains(itemd)) {
                     continue;
                 }
-                if (!Config.CanDuplicateUnloadedItem && item.type == ItemType<UnloadedItem>()) {
+                if (!Config.CanDuplicateUnloadedItem && item.type == ModContent.ItemType<UnloadedItem>()) {
                     continue;
                 }
                 if (!Config.CanDuplicateBag && IsBag(item)) {
@@ -203,11 +199,11 @@ public class Duplicator : ModNPC {
         bool ret = ItemLoader.CanRightClick(item);
         //Main.mouseRight = oldRight;
         return ret;
-        var rules = Main.ItemDropsDB.GetRulesForItemID(item.type);
-        if (rules != null && rules.Count > 0) {
-            return true;
-        }
-        return false;
+        // var rules = Main.ItemDropsDB.GetRulesForItemID(item.type);
+        // if (rules != null && rules.Count > 0) {
+        //     return true;
+        // }
+        // return false;
     }
 
     public override void Load() {
@@ -221,8 +217,10 @@ public class Duplicator : ModNPC {
         // ItemID.GoldCoin = 73
         // ItemID.PlatinumCoin = 74
         int cap = 999_99_99_99;
-        if (Config.Cap999 == TigerDuplicatorConfig.CapRange.OnlyDuplicator && Main.LocalPlayer.TalkNPC.type == NPCType<Duplicator>() ||
-            Config.Cap999 == TigerDuplicatorConfig.CapRange.AllNPC) {
+
+        if (Config.Cap999 == TigerDuplicatorConfig.CapRange.AllNPC ||
+            Config.Cap999 == TigerDuplicatorConfig.CapRange.OnlyDuplicator &&
+            Main.LocalPlayer.TalkNPC?.type == ModContent.NPCType<Duplicator>()) {
             if (calcForBuying > cap) {
                 calcForBuying = cap;
             }
