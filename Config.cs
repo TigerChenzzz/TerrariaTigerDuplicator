@@ -112,6 +112,7 @@ namespace TigerDuplicator {
         public Dictionary<ItemDefinition, int> GetCustomValue() => customValue;
 
         public class ItemValuePair(ItemDefinition item, int value) {
+            public ItemValuePair() : this(new(), 0) { }
             public ItemDefinition Item = item;
             [Range(0, int.MaxValue)]
             public int Value = value;
@@ -200,7 +201,7 @@ namespace TigerDuplicator {
         public override void OnChanged() {
             customValue.Clear();
             foreach (var pair in CustomValue) {
-                customValue.Add(pair.Item, pair.Value);
+                customValue[pair.Item] = pair.Value;
             }
         }
 

@@ -1,5 +1,8 @@
 Value:
 	'''
+	v0.2.1.3
+	- fix the broken "Custom Value" config
+
 	v0.2.1.2
 	- fix an implicit bug when config "Cap Price" is set to "Only Duplicator"
 
